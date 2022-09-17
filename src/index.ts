@@ -5,6 +5,12 @@ import 'dotenv/config'
 import { db, init } from './init'
 import uid from './uid'
 
+const envs: { PORT: string } | any = process.env
+const server = express()
+
+server.use(body.urlencoded({ extended: false }))
+server.use(body.json())
+
 init({
   user: 'root',
   pass: 'root',
@@ -17,12 +23,6 @@ init({
   .catch((err) => {
     console.log(err)
   })
-
-const envs: { PORT: string } | any = process.env
-const server = express()
-
-server.use(body.urlencoded({ extended: false }))
-server.use(body.json())
 
 server.get('/:id', async (req: any, res: any) => {
   const { id } = req.params
